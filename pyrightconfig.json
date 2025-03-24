@@ -1,0 +1,16 @@
+{
+  "venv": "venv",
+  "venvPath": "/home/Karol/projekty/education-game-gryf-smart",
+  "python": {
+    "pythonPath": "/home/Karol/projekty/education-game-gryf-smart/venv/bin/python3",
+    "analysis": {
+      "extraPaths": [
+        "/home/Karol/projekty/education-game-gryf-smart/venv/lib/python3.13/site-packages"
+      ],
+      "reportMissingImports": false,
+      "autoSearchPaths": true,
+      "useLibraryCodeForTypes": true
+    }
+  }
+}
+
