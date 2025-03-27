@@ -4,6 +4,7 @@ from source.singleton import gl_data
 from source.selectingWindow import SelectingWindow
 from source.const import (
     CONF_SELECTED_WINDOW,
+    CONF_CONNECTING_MODE,
 )
 
 pygame.init()
@@ -11,6 +12,7 @@ window = pygame.display.set_mode()
 
 async def main():
     gl_data[CONF_SELECTED_WINDOW] = SelectingWindow(window)
+    gl_data[CONF_CONNECTING_MODE] = False
 
     isRunning = True
     while isRunning:

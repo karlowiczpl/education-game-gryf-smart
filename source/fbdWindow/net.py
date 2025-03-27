@@ -6,8 +6,6 @@ from .element import Element
 from source.singleton import gl_data
 from source.const import CONF_LEFT_BAR_SIZE
 
-sample_image = pygame.image.load("source/fbdWindow/img/and.png")
-
 class Net:
     def __init__(self, win):
         self._win = win
@@ -21,12 +19,7 @@ class Net:
         self._camera_position_y = 0
         self._area_width = 0
         self._area_height = 0
-        
-        self._elements = [Element(1,1,win,sample_image, self), Element(30,30,win,sample_image, self)]
 
-    def draw_element(self, element: Element):
-        for element in self._elements:
-            element.draw()
     @property
     def max_grid_size(self):
         max_width = (self._win_width - self._left_bar_size) // self._distance
@@ -49,9 +42,5 @@ class Net:
             pygame.draw.line(self._win, self._color, (i, 0), (i, self._win_height))
             i += self._distance
 
-        for item in self._elements:
-            self.draw_element(item)
-
     def event(self, event):
-        for element in self._elements:
-            element.event(event)
+        pass

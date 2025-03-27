@@ -9,8 +9,11 @@ class Example:
     _win: pygame.Surface
 
     def __init__(self, window, x, y, image):
-        self._width = 700
-        self._height = 700
+        width, height = window.get_size()
+        self._width = width//5
+        self._height = height//3
+        self._default_width = self._width
+        self._default_height = self._height
         self._win = window
         self._x = int(x - (self._width//2))
         self._y = int(y - (self._height//2))
@@ -34,8 +37,8 @@ class Example:
                 self._animation_counter = 0
         else:
             if self._animation_enable:
-                self._width = 700
-                self._height = 700
+                self._width = self._default_width
+                self._height = self._default_height
                 self._animation_enable = False
                 self._image = self._first_image
 

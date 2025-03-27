@@ -32,15 +32,17 @@ class ScrolArea:
         gl_data[CONF_LEFT_BAR_SIZE] = self._left_menu_size
 
     def draw(self):
-        # pygame.draw.rect(self._win, (255, 255, 255), (0, 0, self._left_menu_size, self._win_height))
+        pygame.draw.rect(self._win, (169, 169, 169), (0, 0, self._left_menu_size, self._win_height))
         pygame.draw.rect(self._win, (0, 0, 0), (self._left_menu_size, 0, 10, self._win_height))
         self._left_menu_hitbox.update(self._left_menu_size, 0)
 
-        # for i in range(len(self._gates)):
-        #     x = [0, size//2]
-        #     y = int(i/2) * size * 0.24
-        #
-        #     self._gates[i].draw(size*0.5,size*0.48*0.5,x[i%2],y)
+        size = gl_data[CONF_LEFT_BAR_SIZE]
+
+        for i in range(len(self._gates)):
+            x = [0, size//2]
+            y = int(i/2) * size * 0.24
+
+            self._gates[i].draw(size*0.5,size*0.48*0.5,x[i%2],y)
         return self._left_menu_size
 
     def event(self, event):
