@@ -4,6 +4,8 @@ from source.hitbox import HitBox
 from source.singleton import gl_data
 from source.const import CONF_LEFT_BAR_SIZE, CONF_NET, CONF_CONNECTING_MODE
 
+from .connector import Connector
+
 class Element:
     _win: pygame.Surface
 
@@ -20,12 +22,12 @@ class Element:
         new_height = int(200 * original_height/original_width)  
         self._image = pygame.transform.scale(image, (200, new_height))
         self._hitbox = HitBox(self._image.get_width(), self._image.get_height(), win)
-
-        self._connectors_hitbox = [
-            HitBox(20, 20, win),
-            HitBox(20, 20, win),
-            HitBox(20, 20, win),
+        self._connectors = [
+            Connector(win, 0),
+            Connector(win, 1),
+            Connector(win, 2),
         ]
+
 
     def draw(self):
         x = self._x * 20 + gl_data[CONF_LEFT_BAR_SIZE]
@@ -34,15 +36,18 @@ class Element:
         self._win.blit(self._image, (x, y))
         self._hitbox.update(x, y)
         self._hitbox.draw()
-
-        self._connectors_hitbox[0].update(x + 10, y + 12)
-        self._connectors_hitbox[1].update(x + 10, y + 64)
-        self._connectors_hitbox[2].update(x + 178, y + 38)
-
-        for hitbox in self._connectors_hitbox:
-            hitbox.draw()
+        
+        for connector in self._connectors:
+            connector.draw(x, y)
 
     def event(self, event):
+        for connector in self._connectors:
+            connector.event(event)
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                gl_data[CONF_CONNECTING_MODE] = False
+
         if not gl_data[CONF_CONNECTING_MODE]:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = event.pos
